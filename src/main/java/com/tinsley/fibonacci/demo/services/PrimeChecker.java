@@ -9,7 +9,7 @@ public class PrimeChecker {
         //check if num is positive
         if (num > 0) {
             //check for primeality
-            if (num % 2 == 0) {
+            if (num % 2 == 0 || num == 0 || num == 1) {
                 System.out.println("is a prime: " + num + " " + false);
                 return false;
 
