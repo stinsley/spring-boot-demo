@@ -1,17 +1,17 @@
-package com.tinsley.fibonacci.demo.service;
+package com.tinsley.fibonacci.demo.services;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class StringPerm {
+public class StringPermutation {
 
     /**
      * Members
      */
     private int executionNum;
-    private JSONObject json = new JSONObject();
+    private final JSONObject json = new JSONObject();
     private String storageVar;
     private String stringOfInterest;
 
