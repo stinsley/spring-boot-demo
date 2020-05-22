@@ -2,15 +2,28 @@ package com.tinsley.fibonacci.demo.services;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class WildFibonacci {
 
+    private final int result = 0;
+    private int sum = 0;
+    private int temp = 0;
+    private int temp1 = 1;
 
-    public String calculate(int num) {
+    public Object[] calculate(int upperLimit) {
+        //calculate a fibonacci to a specified upper limit
+        List<Object> resultList = new ArrayList<>();
+        resultList.clear();
+        for (int x = 0; x < upperLimit; x++) {
+            resultList.add(Integer.toString(sum));
+            sum = temp1 + temp;
+            temp = temp1;
+            temp1 = sum;
 
-        double result = Math.pow(1 + Math.sqrt(num), num) - Math.pow(1 - Math.sqrt(num), num) / (Math.pow(num, 2));
-        System.out.println(Math.pow(num, 2));
-
-        return Double.toString(result);
+        }
+        return resultList.toArray();
     }
 }
