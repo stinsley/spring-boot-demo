@@ -1,8 +1,8 @@
 package com.tinsley.fibonacci.demo.rest;
 
-import com.tinsley.fibonacci.demo.services.WildFibonacci;
 import com.tinsley.fibonacci.demo.services.PrimeChecker;
 import com.tinsley.fibonacci.demo.services.StringPermutation;
+import com.tinsley.fibonacci.demo.services.WildFibonacci;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +16,7 @@ public class DemonstrationRestCtrlr {
     private final StringPermutation stringPermutation;
     private final WildFibonacci fs;
     private final PrimeChecker usdaPrime;
-    private int fibonacci1;
-    private int fibonacci2;
+
 
     /**
      * Constructor for services / params
@@ -35,9 +34,10 @@ public class DemonstrationRestCtrlr {
         this.fs = fs;
 
     }
+
     @RequestMapping(value = "/prime", method = RequestMethod.POST)
-    public void prime(@RequestParam int num) {
-             usdaPrime.primeCheck(num);
+    public Boolean prime(@RequestParam int num) {
+        return usdaPrime.primeCheck(num);
     }
 
 
