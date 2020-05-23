@@ -1,8 +1,8 @@
-package com.tinsley.fibonacci.demo.rest;
+package com.tinsley.demo.rest;
 
-import com.tinsley.fibonacci.demo.services.PrimeChecker;
-import com.tinsley.fibonacci.demo.services.StringPermutation;
-import com.tinsley.fibonacci.demo.services.WildFibonacci;
+import com.tinsley.demo.services.PrimeChecker;
+import com.tinsley.demo.services.StringPermutation;
+import com.tinsley.demo.services.WildFibonacci;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,19 +35,19 @@ public class DemonstrationRestCtrlr {
 
     }
 
-    @RequestMapping(value = "/prime", method = RequestMethod.POST)
+    @RequestMapping(value = "/prime", method = RequestMethod.GET)
     public Boolean prime(@RequestParam int num) {
         return usdaPrime.primeCheck(num);
     }
 
 
-    @RequestMapping(value = "/fibonacci", method = RequestMethod.POST)
+    @RequestMapping(value = "/fibonacci", method = RequestMethod.GET)
     public Object[] fibonacci(@RequestParam int num) {
         return fs.calculate(num);
     }
 
 
-    @RequestMapping(value = "/stringpermutations", method = RequestMethod.POST)
+    @RequestMapping(value = "/stringpermutations", method = RequestMethod.GET)
     public Object perms(@RequestParam String word) {
         Object result = this.stringPermutation.perm("", word);
         //clean up the object in the permutation class

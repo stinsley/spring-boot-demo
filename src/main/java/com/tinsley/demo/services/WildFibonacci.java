@@ -1,4 +1,4 @@
-package com.tinsley.fibonacci.demo.services;
+package com.tinsley.demo.services;
 
 import org.springframework.stereotype.Component;
 

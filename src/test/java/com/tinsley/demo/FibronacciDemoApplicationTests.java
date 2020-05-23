@@ -1,4 +1,4 @@
-package com.tinsley.fibonacci.demo;
+package com.tinsley.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
