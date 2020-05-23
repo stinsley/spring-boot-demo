@@ -8,15 +8,17 @@ import java.util.List;
 @Component
 public class WildFibonacci {
 
-    private final int result = 0;
-    private int sum = 0;
-    private int temp = 0;
-    private int temp1 = 1;
+
+    List<Object> resultList = new ArrayList<>();
 
     public Object[] calculate(int upperLimit) {
         //calculate a fibonacci to a specified upper limit
-        List<Object> resultList = new ArrayList<>();
+        int result = 0;
+        int sum = 0;
+        int temp = 0;
+        int temp1 = 1;
         resultList.clear();
+
         for (int x = 0; x < upperLimit; x++) {
             resultList.add(Integer.toString(sum));
             sum = temp1 + temp;
@@ -24,6 +26,17 @@ public class WildFibonacci {
             temp1 = sum;
 
         }
+
         return resultList.toArray();
+    }
+
+    /**
+     *
+     * helpers
+     *
+     */
+
+    public void clearResults(){
+        resultList.clear();
     }
 }

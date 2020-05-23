@@ -43,7 +43,9 @@ public class DemonstrationRestCtrlr {
 
     @RequestMapping(value = "/fibonacci", method = RequestMethod.GET)
     public Object[] fibonacci(@RequestParam int num) {
-        return fs.calculate(num);
+        Object[] res = fs.calculate(num);
+        fs.clearResults();
+        return res;
     }
 
 
