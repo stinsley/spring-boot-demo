@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DemonstrationRestCtrlr {
+public class RestCtrlr {
     /**
      * Fields
      */
@@ -23,7 +23,7 @@ public class DemonstrationRestCtrlr {
      *
      * @param stringPermutation
      */
-    public DemonstrationRestCtrlr(
+    public RestCtrlr(
             StringPermutation stringPermutation
             , WildFibonacci fs
             , PrimeChecker usdaPrime) {
