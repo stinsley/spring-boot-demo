@@ -7,22 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringPermutation {
 
-    /**
-     * Members
-     */
-    private int executionNum;
     private final JSONObject json = new JSONObject();
-    private String storageVar;
-    private String stringOfInterest;
-
-
+    private int executionNum =0;
 
     public Object perm(String storageVar, String stringOfInterest) {
         int z = stringOfInterest.length();
-        executionNum++;
         if (z == 0) {
-            //print out final result/return final result
-            //This stops the recursion from executing forever
+            executionNum++;
             System.out.println(storageVar);
             if(!storageVar.isEmpty())
                 save(storageVar, executionNum);
@@ -41,12 +32,14 @@ public class StringPermutation {
 
 
     private void save(String sVar, int exe){
+
         json.put(Integer.toString(exe), sVar);
 
     }
 
     public void clear(){
         json.clear();
+        executionNum = 0;
     }
 
     private String getJson(){
