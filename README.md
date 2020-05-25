@@ -17,18 +17,18 @@ REST API:
 
 Service Health via Actuator: 
 
-    localhost:8080/actuator/health
+    localhost:8080/health
     
     This should return service health of {"status":"UP"}
 
 metrics end points:
 
-    //todo prometheus scrape page
-
+    //prometheus scrape page with all the metrics
+    http://localhost:8080/prometheus/
+    
     //see specific metric
-    http://localhost:8080/actuator/metrics/Prime_Numerator
+    http://localhost:8080/metrics/Prime_Numerator
     
     //see available metrics
-    http://localhost:8080/actuator/metrics
+    http://localhost:8080/metrics
     
-    Available Metrics: 
