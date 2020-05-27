@@ -1,5 +1,6 @@
 package com.tinsley.demo.rest;
 
+import com.tinsley.demo.services.PalindromeService;
 import com.tinsley.demo.services.PrimeChecker;
 import com.tinsley.demo.services.StringPermutation;
 import com.tinsley.demo.services.WildFibonacci;
@@ -18,6 +19,7 @@ public class RestCtrlr {
     private final StringPermutation stringPermutation;
     private final WildFibonacci fs;
     private final PrimeChecker usdaPrime;
+    private final PalindromeService ps;
     private MeterRegistry meterRegistry;
     private Counter restRequestCount;
 
@@ -28,12 +30,13 @@ public class RestCtrlr {
      */
     public RestCtrlr(
             StringPermutation stringPermutation
-            , WildFibonacci fs, PrimeChecker usdaPrime, MeterRegistry meterRegistry) {
+            , WildFibonacci fs, PrimeChecker usdaPrime, PalindromeService ps, MeterRegistry meterRegistry) {
         this.meterRegistry = meterRegistry;
         this.usdaPrime = usdaPrime;
         this.stringPermutation = stringPermutation;
         this.stringPermutation.clear();
         this.fs = fs;
+        this.ps = ps;
         this.restRequestCount = this.meterRegistry.counter("Rest.Request.Count", "Count of rest requests", "Count of requests");
 
 
@@ -61,6 +64,14 @@ public class RestCtrlr {
         Object result = this.stringPermutation.perm("", word);
         //clean up the object in the permutation class
         this.stringPermutation.clear();
+        return result;
+    }
+
+    @RequestMapping(value = "/palindrome", method = RequestMethod.GET)
+    public Boolean palindrome(@RequestParam String word) {
+        this.restRequestCount.increment();
+        Boolean result = this.ps.checkPalindrome(word);
+        //clean up the object in the permutation class
         return result;
     }
 
