@@ -35,3 +35,25 @@ metrics end points:
     //see available metrics
     http://localhost:8080/metrics
     
+
+Run this locally in a container on kubernetes using draft: 
+pkg requirements: 
+helm-latest
+draft-latest
+Kubernetes v1.18.2 
+Docker 19.03.8
+vmware/virtualbox/etc. - latest
+java 11+ (using java 14 to be safe - this was coded on java 14)
+gradle - latest
+
+1) start minikube 
+    $> minikube start
+    $> 
+
+
+
+Run locally in your ide: 
+import the project
+refresh gradle deps
+click the play button
+
