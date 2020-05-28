@@ -4,6 +4,9 @@ Spring boot services demo affectionately known as "Wild fibonacci"
 @author stinsley
 
 REST API: 
+
+    palindrome checker: 
+    http://localhost:8080/palindrome?word=103
     
     Fibonacci Calculations: 
     localhost:8080/fibonacci?num=10 
