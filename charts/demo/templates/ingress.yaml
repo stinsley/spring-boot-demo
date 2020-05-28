@@ -6,7 +6,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
-  rules:
+ rules:
   - host: {{ .Release.Name }}.{{ .Values.basedomain }}
     http:
       paths:

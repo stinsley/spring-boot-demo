@@ -1,22 +1,21 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
   labels:
-    draft: {{ default "draft-app" .Values.draft }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ template "fullname" . }}
   template:
     metadata:
-      annotations:
-        buildID: {{ .Values.buildID }}
       labels:
-        draft: {{ default "draft-app" .Values.draft }}
-        app: {{ template "fullname" . }}
+        name: {{ template "fullname" . }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
