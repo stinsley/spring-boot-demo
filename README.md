@@ -41,10 +41,9 @@ pkg requirements:
 helm-3.0+ (no tiller)
 Kubernetes v1.18.2 
 Docker 19.03.8
-vmware/virtualbox/hyperkit(etc). - latest
+virtualbox/hyperkit/kvm(etc). - latest
 java 11+ (using java 14 to be safe - this was coded on java 14)
 gradle - latest
-
 
 Note: to deploy this to MK you need to have configured .docker/config.json
 Kubelet will merge any imagePullSecrets into a single virtual .docker/config.json
@@ -59,30 +58,39 @@ A notification from the Registry would then trigger a deployment on a staging en
 or notify other systems that a new image is available." - Docker
 
 #STEPS TO RUN IN LOCAL MINIKUBE
-1)use gradle to build the docker image (call the image name whatever you choose)
-    $> ./gradlew bootBuildImage --imageName=tinsley/demo-docker
+1)
+eval $(minikube docker-env)
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
-2) use docker to push to your local docker repo (requires local docker repo container running and .docker/config.json configured)
-    $> docker tag tinsley/demo-docker tinsley/demo-docker
+2)use gradle to build the docker image (call the image name whatever you choose)
+        $> docker build . -t demo
+
+3) tag the image
+(requires local docker repo container running and .docker/config.json configured)
+    $> docker tag demo localhost:5000/demo
     #in AWS land you'd push to a repo ECR/EKR
+    #locally helm can pull the image from the local docker repo, mk and kubernetes can as well
+4) push the image to the local repo
+    $> docker push localhost:5000/demo
+
+
+5) ensure docker is running, start minikube telling it to use the local docker
+    registry (--insecure-registry param)
     
-3) ensure docker is running, start minikube 
-    $> minikube start
+    $> minikube start --insecure-registry
     or
-    $> minikube start --driver=virtualbox
+    $> minikube start --driver=virtualbox --insecure-registry
     or 
-    $> minikube --memory=5000 --driver=virtualbox
+    $> minikube --memory=5000 --driver=virtualbox --insecure-registry
 
-4) use helm v3 to push app to k8 (put in any release name you would like)
-    $> helm upgrade --install tinsley demo
+6) use kubectl to push the image into minikube
+    $> kubectl create deployment demo --image=localhost:5000/demo -o=yaml > deployment.yaml
 
-5) verify the service launched in MK
-   $> kubectl get pods
+7) verify the service launched ok in MK
+   $> kubectl get pods, grab pod name
 
-6) port forward and play with the service
-    $>   export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=demo,app.kubernetes.io/instance=tinsley" -o jsonpath="{.items[0].metadata.name}")
-         echo "Visit http://127.0.0.1:8080 to use your application"
-         kubectl --namespace default port-forward $POD_NAME 8080:8090
+8) port forward and play with the service
+    $>    kubectl port-forward <pod name> -n default 8080:8080
 
 
 
