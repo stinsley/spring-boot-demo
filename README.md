@@ -77,11 +77,11 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 5) ensure docker is running, start minikube telling it to use the local docker
     registry (--insecure-registry param)
     
-    $> minikube start --insecure-registry
+    $> minikube start
     or
-    $> minikube start --driver=virtualbox --insecure-registry
+    $> minikube start --insecure-registry "127.0.0.0/24"
     or 
-    $> minikube --memory=5000 --driver=virtualbox --insecure-registry
+    $> minikube --memory=5000 --driver=virtualbox --insecure-registry "127.0.0.0/24"
 
 6) use kubectl to push the image into minikube
     $> kubectl create deployment demo --image=localhost:5000/demo -o=yaml > deployment.yaml
